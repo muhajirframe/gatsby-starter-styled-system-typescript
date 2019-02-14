@@ -1,92 +1,63 @@
-import React from "react";
-import Helmet from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import Helmet from 'react-helmet';
 
-interface Props {
-  description?: string;
-  lang: string;
-  meta: [];
-  keywords: string[];
-  title: string;
-}
-
-const SEO: React.FunctionComponent<Props> = ({
-  description,
-  lang,
+const buildMeta = ({
   meta,
+  metaDescription,
+  title,
+  author,
   keywords,
-  title
-}) => {
-  return (
-    <StaticQuery
-      query={detailsQuery}
-      render={data => {
-        const metaDescription =
-          description || data.site.siteMetadata.description;
-        return (
-          <Helmet
-            htmlAttributes={{
-              lang
-            }}
-            title={title}
-            titleTemplate={`%s | ${data.site.siteMetadata.title}`}
-            meta={[
-              {
-                name: `description`,
-                content: metaDescription
-              },
-              {
-                property: `og:title`,
-                content: title
-              },
-              {
-                property: `og:description`,
-                content: metaDescription
-              },
-              {
-                property: `og:type`,
-                content: `website`
-              },
-              {
-                name: `twitter:card`,
-                content: `summary`
-              },
-              {
-                name: `twitter:creator`,
-                content: data.site.siteMetadata.author
-              },
-              {
-                name: `twitter:title`,
-                content: title
-              },
-              {
-                name: `twitter:description`,
-                content: metaDescription
-              }
-            ]
-              .concat(
-                keywords.length > 0
-                  ? {
-                      name: `keywords`,
-                      content: keywords.join(`, `)
-                    }
-                  : []
-              )
-              .concat(meta)}
-          />
-        );
-      }}
-    />
-  );
-};
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  keywords: []
-};
-
-export default SEO;
+}: {
+  meta: [];
+  metaDescription: string;
+  title: string;
+  author: string;
+  keywords: string[];
+}) =>
+  [
+    {
+      content: metaDescription,
+      name: `description`,
+    },
+    {
+      content: title,
+      property: `og:title`,
+    },
+    {
+      content: metaDescription,
+      property: `og:description`,
+    },
+    {
+      content: `website`,
+      property: `og:type`,
+    },
+    {
+      content: `summary`,
+      name: `twitter:card`,
+    },
+    {
+      content: author,
+      name: `twitter:creator`,
+    },
+    {
+      content: title,
+      name: `twitter:title`,
+    },
+    {
+      content: metaDescription,
+      name: `twitter:description`,
+    },
+  ]
+    .concat(
+      keywords.length > 0
+        ? {
+            content: keywords.join(`, `),
+            name: `keywords`,
+          }
+        : [],
+    )
+    .concat(meta);
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
@@ -99,3 +70,45 @@ const detailsQuery = graphql`
     }
   }
 `;
+interface IProps {
+  description?: string;
+  lang: string;
+  meta: [];
+  keywords: string[];
+  title: string;
+}
+
+const SEO: React.FunctionComponent<IProps> = ({
+  description,
+  lang,
+  meta,
+  keywords,
+  title,
+}) => {
+  const data = useStaticQuery(detailsQuery);
+  const metaDescription = description || data.site.siteMetadata.description;
+  const builtMeta = buildMeta({
+    author: data.siteMetadata.author,
+    keywords,
+    meta,
+    metaDescription,
+    title,
+  });
+
+  return (
+    <Helmet
+      htmlAttributes={{ lang }}
+      title={title}
+      titleTemplate={`%s | ${data.site.siteMetadata.title}`}
+      meta={builtMeta}
+    />
+  );
+};
+
+SEO.defaultProps = {
+  keywords: [],
+  lang: `en`,
+  meta: [],
+};
+
+export default SEO;
