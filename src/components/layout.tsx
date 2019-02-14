@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { theme } from '../theme';
+import { light } from '../theme';
 import Header from './header';
 import './layout.css';
 
@@ -19,7 +19,7 @@ const QUERY = graphql`
 const Layout: React.FunctionComponent = ({ children }) => {
   const data = useStaticQuery(QUERY);
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={light}>
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div>
