@@ -23,9 +23,9 @@ const space = [0, 4, 8, 16, 32, 64, 128, 256];
 /**
  * THEME INTERFACE
  */
-type color = 'primary' | 'secondary';
-type font = 'mono' | 'sans';
-type shadow = 'large' | 'small';
+export type color = 'primary' | 'secondary';
+export type font = 'mono' | 'sans';
+export type shadow = 'large' | 'small';
 interface ITheme {
   colors: { [key in color]: string };
   breakpoints: string[];
