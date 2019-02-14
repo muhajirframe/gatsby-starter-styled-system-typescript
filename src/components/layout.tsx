@@ -1,7 +1,6 @@
 import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { sitetitle } from '../generated/graphql';
 
 import Header from './header';
 import './layout.css';
