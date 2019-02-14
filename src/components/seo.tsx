@@ -88,7 +88,7 @@ const SEO: React.FunctionComponent<IProps> = ({
   const data = useStaticQuery(detailsQuery);
   const metaDescription = description || data.site.siteMetadata.description;
   const builtMeta = buildMeta({
-    author: data.siteMetadata.author,
+    author: data.site.siteMetadata.author,
     keywords,
     meta,
     metaDescription,
