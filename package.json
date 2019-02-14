@@ -44,16 +44,17 @@
   "devDependencies": {
     "@types/react-helmet": "^5.0.8",
     "@types/rebass": "^3.0.2",
+    "@types/styled-components": "^4.1.10",
     "babel-plugin-styled-components": "^1.10.0",
     "graphql-code-generator": "^0.16.1",
+    "graphql-codegen-fragment-matcher": "0.16.1",
+    "graphql-codegen-typescript-client": "0.16.1",
+    "graphql-codegen-typescript-common": "0.16.1",
+    "graphql-codegen-typescript-graphql-files-modules": "0.16.1",
+    "graphql-codegen-typescript-react-apollo": "0.16.1",
     "graphql-codegen-typescript-template": "^0.16.1",
     "tslint": "^5.12.1",
     "tslint-react": "^3.6.0",
-    "typescript": "^3.3.3",
-    "graphql-codegen-typescript-common": "0.16.1",
-    "graphql-codegen-typescript-client": "0.16.1",
-    "graphql-codegen-typescript-react-apollo": "0.16.1",
-    "graphql-codegen-typescript-graphql-files-modules": "0.16.1",
-    "graphql-codegen-fragment-matcher": "0.16.1"
+    "typescript": "^3.3.3"
   }
 }
