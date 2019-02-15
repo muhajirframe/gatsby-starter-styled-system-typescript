@@ -19,7 +19,7 @@ const BuildKeywords: React.FC<IBuildKeywords> = (props: IBuildKeywords) => {
 };
 
 interface IKeywords {
-  ref: firestore.DocumentReference;
+  ref?: firestore.DocumentReference;
 }
 
 const Keywords: React.FunctionComponent<IKeywords> = (props) => {
