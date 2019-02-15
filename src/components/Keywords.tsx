@@ -6,6 +6,8 @@ import { docData } from 'rxfire/firestore';
 import { map } from 'rxjs/operators';
 import { getFirebaseApp } from '../lib/firebase';
 
+const app = getFirebaseApp();
+
 interface IBuildKeywords {
   list: string[];
 }
@@ -20,7 +22,6 @@ interface IKeywords {
   ref: firestore.DocumentReference;
 }
 
-const app = getFirebaseApp();
 const Keywords: React.FunctionComponent<IKeywords> = (props) => {
   const [state, setState] = useState<string[]>([]);
 
