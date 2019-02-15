@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
+import { firestore } from 'firebase';
 import { docData } from 'rxfire/firestore';
 import { map } from 'rxjs/operators';
 import { getFirebaseApp } from '../lib/firebase';
@@ -15,22 +16,20 @@ const BuildKeywords: React.FC<IBuildKeywords> = (props: IBuildKeywords) => {
   return <ul>{items}</ul>;
 };
 
-const Keywords: React.FunctionComponent = (props) => {
-  const [state, setState] = useState<string[]>([]);
+interface IKeywords {
+  ref: firestore.DocumentReference;
+}
 
-  const app = getFirebaseApp();
+const app = getFirebaseApp();
+const Keywords: React.FunctionComponent<IKeywords> = (props) => {
+  const [state, setState] = useState<string[]>([]);
 
   function updateKeywords(keywords: string[]) {
     setState(keywords);
   }
 
   useEffect(() => {
-    const subscribtion = docData<{ id: string; keywords: string[] }>(
-      app
-        .firestore()
-        .collection('configs')
-        .doc('discord'),
-    )
+    const subscribtion = docData<{ id: string; keywords: string[] }>(props.ref)
       .pipe(map((x) => x.keywords))
       .subscribe(updateKeywords);
 
@@ -38,6 +37,13 @@ const Keywords: React.FunctionComponent = (props) => {
   }, []);
 
   return <BuildKeywords list={state} />;
+};
+
+Keywords.defaultProps = {
+  ref: app
+    .firestore()
+    .collection('configs')
+    .doc('discord'),
 };
 
 export default Keywords;
