@@ -19,7 +19,7 @@ const defaultProps = {
     .doc('discord'),
 };
 
-function Keyword(props: Props) {
+function Keywords(props: Props) {
   const [state, setState] = useState<string[]>([]);
 
   function updateKeywords(keywords: string[]) {
