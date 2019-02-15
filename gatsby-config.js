@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Monad Configs`,
-    description: `Monad company variable configs`,
+    title: `Company Config`,
+    description: `Company internal variable configs`,
     author: `@muhajirframe`
   },
   plugins: [
