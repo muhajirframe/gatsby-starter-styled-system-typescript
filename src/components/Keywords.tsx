@@ -8,21 +8,18 @@ import { getFirebaseApp } from '../lib/firebase';
 
 const app = getFirebaseApp();
 
-interface IBuildKeywords {
-  list: string[];
-}
+type Props = {
+  reference?: firestore.DocumentReference;
+} & typeof defaultProps;
 
-const BuildKeywords: React.FC<IBuildKeywords> = (props: IBuildKeywords) => {
-  const items = props.list.map((item) => <li key={item}>{item}</li>);
-
-  return <ul>{items}</ul>;
+const defaultProps = {
+  reference: app
+    .firestore()
+    .collection('configs')
+    .doc('discord'),
 };
 
-interface IKeywords {
-  ref?: firestore.DocumentReference;
-}
-
-const Keywords: React.FunctionComponent<IKeywords> = (props) => {
+function Keyword(props: Props) {
   const [state, setState] = useState<string[]>([]);
 
   function updateKeywords(keywords: string[]) {
@@ -30,21 +27,20 @@ const Keywords: React.FunctionComponent<IKeywords> = (props) => {
   }
 
   useEffect(() => {
-    const subscribtion = docData<{ id: string; keywords: string[] }>(props.ref)
+    const subscribtion = docData<{ id: string; keywords: string[] }>(
+      props.reference,
+    )
       .pipe(map((x) => x.keywords))
       .subscribe(updateKeywords);
 
     return () => subscribtion.unsubscribe();
   }, []);
 
-  return <BuildKeywords list={state} />;
-};
+  const items = state.map((item) => <li key={item}>{item}</li>);
 
-Keywords.defaultProps = {
-  ref: app
-    .firestore()
-    .collection('configs')
-    .doc('discord'),
-};
+  return <ul>{items}</ul>;
+}
+
+Keywords.defaultProps = defaultProps;
 
 export default Keywords;
