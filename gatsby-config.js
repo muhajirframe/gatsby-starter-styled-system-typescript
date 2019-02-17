@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Company Config`,
+    title: `Gatsby starter styled-system`,
     description: `Company internal variable configs`,
     author: `@muhajirframe`
   },
