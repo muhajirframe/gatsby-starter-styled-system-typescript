@@ -1,4 +1,4 @@
-# Gatsby Starter Styled System
+# Gatsby Starter Styled System with Typescript
 
 What's included:
 
@@ -6,6 +6,7 @@ What's included:
 - Styled components
 - Rebass
 - Styled System
+- Typescript
 
 ## Getting Started
 
@@ -18,7 +19,7 @@ npm install --global gatsby-cli
 Create new Gatsby project using this starter:
 
 ```sh
-gatsby new my-new-website https://github.com/muhajirframe/gatsby-starter-styled-system
+gatsby new my-new-website https://github.com/muhajirframe/gatsby-starter-styled-system-typescript
 ```
 
 ```sh
@@ -35,7 +36,7 @@ Your built file will be in `/public`
 
 ## Contributing
 
-- [Submit an idea](https://github.com/muhajirframe/gatsby-starter-styled-system/issues/new)
+- [Submit an idea](https://github.com/muhajirframe/gatsby-starter-styled-system-typescript/issues/new)
 - Make a pull request
 
 ## Related
