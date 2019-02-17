@@ -78,13 +78,7 @@ interface IProps {
   title: string;
 }
 
-const SEO: React.FunctionComponent<IProps> = ({
-  description,
-  lang,
-  meta,
-  keywords,
-  title,
-}) => {
+function SEO({ description, lang, meta, keywords, title }: IProps) {
   const data = useStaticQuery(detailsQuery);
   const metaDescription = description || data.site.siteMetadata.description;
   const builtMeta = buildMeta({
@@ -103,7 +97,7 @@ const SEO: React.FunctionComponent<IProps> = ({
       meta={builtMeta}
     />
   );
-};
+}
 
 SEO.defaultProps = {
   keywords: [],
