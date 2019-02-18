@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { light } from '../theme';
 import './layout.css';
 
+import { Box } from 'rebass';
 import { getFirebaseApp } from '../lib/firebase';
 import Header from './header';
 import Keywords from './Keywords';
@@ -21,7 +22,7 @@ function AddKeyword() {
     setValue(e.target.value);
   const handleSubmit = () => {
     ref.update({
-      keywords: firestore.FieldValue.arrayUnion('value'),
+      keywords: firestore.FieldValue.arrayUnion(value),
     });
   };
   return (
@@ -50,16 +51,20 @@ const Layout: React.FunctionComponent = ({ children }) => {
     <ThemeProvider theme={light}>
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Keywords />
-        <AddKeyword />
-        <div>
-          <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href='https://www.gatsbyjs.org'>Gatsby</a>
-          </footer>
-        </div>
+        <Box p='5'>
+          <Box width='30em'>
+            <Keywords />
+            <AddKeyword />
+          </Box>
+          <div>
+            <main>{children}</main>
+            <footer>
+              © {new Date().getFullYear()}, Built with
+              {` `}
+              <a href='https://www.gatsbyjs.org'>Gatsby</a>
+            </footer>
+          </div>
+        </Box>
       </>
     </ThemeProvider>
   );
