@@ -25,12 +25,18 @@ function BuildKeywords(props: BuildKeywords) {
   return <List>{props.data.map(buildKeyword)}</List>;
 }
 
+const ref = app
+  .firestore()
+  .collection('configs')
+  .doc('discord');
 function buildKeyword(keyword: string) {
+  const handleDelete = () =>
+    ref.update({ keywords: firestore.FieldValue.arrayRemove(keyword) });
   return (
     <ListItem>
       <ListItemText>{keyword}</ListItemText>
       <ListItemSecondaryAction>
-        <IconButton>
+        <IconButton onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>
