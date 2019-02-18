@@ -6,6 +6,7 @@
   "author": "Muhammad Muhajir <muhajirframe@gmail.com>",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
     "firebase": "^5.8.3",
     "gatsby": "^2.1.0",
     "gatsby-image": "^2.0.29",
