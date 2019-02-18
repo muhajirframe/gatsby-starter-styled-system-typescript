@@ -16,6 +16,7 @@ const ref = app
   .firestore()
   .collection('configs')
   .doc('discord');
+
 function AddKeyword() {
   const [value, setValue] = useState('');
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -58,11 +59,6 @@ const Layout: React.FunctionComponent = ({ children }) => {
           </Box>
           <div>
             <main>{children}</main>
-            <footer>
-              © {new Date().getFullYear()}, Built with
-              {` `}
-              <a href='https://www.gatsbyjs.org'>Gatsby</a>
-            </footer>
           </div>
         </Box>
       </>
