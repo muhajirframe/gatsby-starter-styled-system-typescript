@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const Header: React.FunctionComponent<IProps> = (props) => (
-  <Box bg='primary' color='primary'>
+  <Box bg='primary' color='primary' px='5' py='5'>
     <h1 style={{ margin: 0 }}>
       <Link to='/' style={{ color: `white`, textDecoration: `none` }}>
         {props.siteTitle}
