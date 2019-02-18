@@ -4,7 +4,7 @@
   "jsRules": {},
   "rules": {
     "quotemark": [true, "single"],
-    "interface-name": false
+    "interface-name": [false]
   },
-  "rulesDirectory": [],
+  "rulesDirectory": []
 }
