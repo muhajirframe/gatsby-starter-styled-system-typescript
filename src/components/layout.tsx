@@ -1,12 +1,37 @@
+import { firestore } from 'firebase';
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { light } from '../theme';
 import './layout.css';
 
+import { getFirebaseApp } from '../lib/firebase';
 import Header from './header';
 import Keywords from './Keywords';
+
+const app = getFirebaseApp();
+const ref = app
+  .firestore()
+  .collection('configs')
+  .doc('discord');
+function AddKeyword() {
+  const [value, setValue] = useState('');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value);
+  const handleSubmit = () => {
+    ref.update({
+      keywords: firestore.FieldValue.arrayUnion('value'),
+    });
+  };
+  return (
+    <div>
+      <input type='text' onChange={handleChange} value={value} />
+
+      <button onClick={handleSubmit}>Submit</button>
+    </div>
+  );
+}
 
 const QUERY = graphql`
   query SiteTitleQuery {
@@ -26,6 +51,7 @@ const Layout: React.FunctionComponent = ({ children }) => {
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Keywords />
+        <AddKeyword />
         <div>
           <main>{children}</main>
           <footer>
