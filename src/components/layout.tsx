@@ -6,7 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { light } from '../theme';
 import './layout.css';
 
-import { Box } from 'rebass';
+import { Button, TextField } from '@material-ui/core';
+import { Box, Flex } from 'rebass';
 import { getFirebaseApp } from '../lib/firebase';
 import Header from './header';
 import Keywords from './Keywords';
@@ -27,16 +28,26 @@ function AddKeyword() {
     });
   };
   return (
-    <div>
-      <input type='text' onChange={handleChange} value={value} />
+    <Flex alignItems='center'>
+      <TextField
+        style={{ flex: 1 }}
+        type='text'
+        variant='outlined'
+        onChange={handleChange}
+        value={value}
+      />
 
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+      <Box ml='1'>
+        <Button variant='outlined' onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Box>
+    </Flex>
   );
 }
 
 function RebuildDiscord() {
-  return <button>Rebuild Discord Bot</button>;
+  return <Button variant='contained'>Rebuild Discord Bot</Button>;
 }
 
 const QUERY = graphql`
