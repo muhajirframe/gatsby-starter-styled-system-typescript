@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby starter styled-system`,
+    title: `Monad Configs`,
     description: `Company internal variable configs`,
     author: `@muhajirframe`
   },
