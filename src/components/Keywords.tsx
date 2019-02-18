@@ -1,12 +1,42 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import { firestore } from 'firebase';
 import { docData } from 'rxfire/firestore';
 import { map } from 'rxjs/operators';
 import { getFirebaseApp } from '../lib/firebase';
 
 const app = getFirebaseApp();
+
+interface BuildKeywords {
+  action: () => void;
+  data: string[];
+}
+function BuildKeywords(props: BuildKeywords) {
+  return <List>{props.data.map(buildKeyword)}</List>;
+}
+
+function buildKeyword(keyword: string) {
+  return (
+    <ListItem>
+      <ListItemText>{keyword}</ListItemText>
+      <ListItemSecondaryAction>
+        <IconButton>
+          <DeleteIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
+    </ListItem>
+  );
+}
 
 type Props = {
   reference?: firestore.DocumentReference;
@@ -20,10 +50,10 @@ const defaultProps = {
 };
 
 function Keywords(props: Props) {
-  const [state, setState] = useState<string[]>([]);
+  const [keywords, setState] = useState<string[]>([]);
 
-  function updateKeywords(keywords: string[]) {
-    setState(keywords);
+  function updateKeywords(data: string[]) {
+    setState(data);
   }
 
   useEffect(() => {
@@ -36,9 +66,10 @@ function Keywords(props: Props) {
     return () => subscribtion.unsubscribe();
   }, []);
 
-  const items = state.map((item) => <li key={item}>{item}</li>);
-
-  return <ul>{items}</ul>;
+  return BuildKeywords({
+    action: () => null,
+    data: keywords,
+  });
 }
 
 Keywords.defaultProps = defaultProps;
