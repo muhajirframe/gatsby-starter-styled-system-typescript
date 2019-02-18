@@ -35,6 +35,10 @@ function AddKeyword() {
   );
 }
 
+function RebuildDiscord() {
+  return <button>Rebuild Discord Bot</button>;
+}
+
 const QUERY = graphql`
   query SiteTitleQuery {
     site {
@@ -53,9 +57,14 @@ const Layout: React.FunctionComponent = ({ children }) => {
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
         <Box p='5'>
+          <h1>Discord</h1>
           <Box width='30em'>
+            <h3>Keywords</h3>
             <Keywords />
             <AddKeyword />
+            <Box py='3'>
+              <RebuildDiscord />
+            </Box>
           </Box>
           <div>
             <main>{children}</main>
