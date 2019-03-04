@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Monad Configs`,
     description: `Company internal variable configs`,
-    author: `@muhajirframe`
+    author: `@muhajirdev`
   },
   plugins: [
     `gatsby-plugin-typescript`,
